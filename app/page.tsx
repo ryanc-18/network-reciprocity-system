@@ -361,7 +361,7 @@ export default function HomePage() {
             </div>
 
 
-            {/* Why Network Growth Drives Adoption */}
+            {/* how network growth increases adoption */}
             <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm'>
               <h3 className='text-xl font-semibold mb-4 text-gray-900'>Why Network Growth Drives 19% → 80% Adoption</h3>
               
@@ -416,7 +416,235 @@ export default function HomePage() {
         }
       {currentView === 'walkthrough' && (
         <div>
-          <h2 className='text-xl font-bold text-gray-500 mb-4'>Prototype Walkthrough</h2>
+          <h2 className='text-3xl font-bold text-gray-900 mb-2'>How It Works</h2>
+          <p className='text-gray-600 mb-8'>A walkthrough of the Kinetic Network incentive system</p>
+
+          <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+             <h3 className='text-xl font-semibold text-gray-900 mb-4'>The Problem</h3>
+              <p className='text-gray-600 mb-4'>
+                Kinetic's 1,800 physiotherapy clinics share patients — but not histories. When a patient visits multiple clinics, each one starts from scratch.
+              </p>
+
+              <div className='grid grid-cols-2 gap-4 mb-4'>
+                <div className='p-4 bg-red-50 border border-red-200 rounded-lg text-center'>
+                  <div className='text-4xl font-bold text-red-600'>71%</div>
+                  <div className='text-sm text-red-800'>Want to receive histories</div>
+                </div>
+                <div className='p-4 bg-green-50 border border-green-200 rounded-lg text-center'>
+                  <div className='text-4xl font-bold text-green-600'>19%</div>
+                  <div className='text-sm text-green-800'>Actually share theirs</div>
+                </div>
+              </div>
+
+              <p className='text-gray-600 mb-3'>Why the gap? Two fears hold clinics back:</p>
+              <div className='space-y-2'>
+                <div className='p-3 bg-gray-50 rounded-lg'>
+                  <p className='text-sm text-gray-700'><strong>Fear 1:</strong> "I don't want to help patients switch to competitors"</p>
+                </div>
+                <div className='p-3 bg-gray-50 rounded-lg'>
+                  <p className='text-sm text-gray-700'><strong>Fear 2:</strong> "What if another physio judges my treatment?"</p>
+                </div>
+              </div>
+
+          </div>
+
+          <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+             <h3 className='text-xl font-semibold text-gray-900 mb-4'>The Solution</h3>
+
+             <p className='text-gray-600 mb-4'>
+                The system makes sharing a selfish, rational decision by giving clinics MORE back than they put in. No altruism required.
+            </p>
+
+            <div className='space-y-2 mb-4'>
+              <div className='flex items-center gap-4 p-3 bg-gray-50 rounded-lg'>
+                <span className='text-sm text-gray-600 w-32'>Share 1–9</span>
+                <span className='text-gray-400'>→</span>
+                <span className='text-sm font-semibold text-blue-600'>1.5x access</span>
+                <span className='text-xs text-gray-500'>(share 5, access 7)</span>
+              </div>
+              <div className='flex items-center gap-4 p-3 bg-blue-50 rounded-lg'>
+                <span className='text-sm text-gray-600 w-32'>Share 10–24</span>
+                <span className='text-gray-400'>→</span>
+                <span className='text-sm font-semibold text-blue-600'>2.5x access</span>
+                <span className='text-xs text-gray-500'>(share 10, access 25)</span>
+              </div>
+              <div className='flex items-center gap-4 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
+                <span className='text-sm text-gray-600 w-32'>Share 25–49</span>
+                <span className='text-gray-400'>→</span>
+                <span className='text-sm font-semibold text-blue-600'>3.5x access</span>
+                <span className='text-xs text-gray-500'>(share 25, access 87)</span>
+              </div>
+              <div className='flex items-center gap-4 p-3 bg-blue-100 border border-blue-300 rounded-lg'>
+                <span className='text-sm text-gray-600 w-32'>Share 50+</span>
+                <span className='text-gray-400'>→</span>
+                <span className='text-sm font-semibold text-blue-600'>5.0x access</span>
+                <span className='text-xs text-gray-500'>(share 50, access 250)</span>
+              </div>
+            </div>
+
+            <div className='p-4 bg-blue-50 border border-blue-200 rounded-lg'>
+              <p className='text-sm text-blue-900'>
+                <strong>Key Insight:</strong> You always get back more than you give. This makes sharing the mathematically rational choice — regardless of what happens to the patient.
+              </p>
+            </div>
+
+          </div>
+
+          <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+            <h3 className='text-xl font-semibold text-gray-900 mb-6'>How The Fears Are Addressed</h3>
+
+            {/* fear 1 */}
+            <div className='mb-6'>
+              <div className='p-3 bg-gray-100 rounded-lg mb-3'>
+                <p className='font-semibold text-gray-900'>Fear 1: "Sharing will help patients switch to competitors"</p>
+              </div>
+              <p className='text-gray-600 text-sm mb-3'>
+                This fear assumes sharing is a net loss. But the math says otherwise:
+              </p>
+              <div className='p-4 bg-green-50 border border-green-200 rounded-lg'>
+                <p className='text-sm text-green-900 font-semibold mb-2'>Worst case scenario:</p>
+                <p className='text-sm text-green-800'>
+                  You share 10 histories. Every single patient switches to the other clinic. You've "lost" 10 patients.
+                </p>
+                <p className='text-sm text-green-800 mt-2'>
+                  But your 2.5x multiplier gives you access to 25 histories. Even in the absolute worst case, you can gain more than you lose.
+                </p>
+                <p className='text-sm text-green-900 font-semibold mt-3'>
+                  → Switching doesn't matter. The multiplier makes sharing rational regardless of patient behaviour.
+                </p>
+              </div>
+            </div>
+
+            {/* fear 2 */}
+            <div>
+              <div className='p-3 bg-gray-100 rounded-lg mb-3'>
+                <p className='font-semibold text-gray-900'>Fear 2: "Other physios will judge my treatment"</p>
+              </div>
+              <p className='text-gray-600 text-sm mb-3'>
+                The system is designed so that subjective, judgeable content never leaves your clinic. Only objective data is shared.
+              </p>
+              <div className='grid grid-cols-2 gap-4'>
+                <div className='p-4 bg-green-50 border border-green-200 rounded-lg'>
+                  <h5 className='font-semibold text-green-900 mb-2'>✓ Shared (Objective)</h5>
+                  <ul className='text-sm text-green-800 space-y-1'>
+                    <li>• Diagnosis history</li>
+                    <li>• Treatment protocols</li>
+                    <li>• Objective measurements</li>
+                    <li>• Imaging results</li>
+                    <li>• Exercise programs</li>
+                    <li>• Treatment outcomes</li>
+                  </ul>
+                </div>
+                <div className='p-4 bg-red-50 border border-red-200 rounded-lg'>
+                  <h5 className='font-semibold text-red-900 mb-2'>✗ Always Private (Subjective)</h5>
+                  <ul className='text-sm text-red-800 space-y-1'>
+                    <li>• Clinical notes</li>
+                    <li>• Personal observations</li>
+                    <li>• Billing information</li>
+                    <li>• Insurance details</li>
+                    <li>• Contact information</li>
+                  </ul>
+                </div>
+              </div>
+              <div className='mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
+                <p className='text-blue-900 mb-3'>
+                  <strong>What if subjective information is required?</strong> 
+                </p>
+                <p>
+                  <strong className='text-sm text-blue-900'>The Reality</strong>
+                </p>
+                <ul className='text-sm text-blue-900 space-y-1'>
+                  <li>• Clinics are already being judged by patients, online reviews, etc.</li>
+                  <li>• This is not something a data-sharing system necessarily creates or should prevent</li>
+                  <li className='ml-5'>- Patients are entitled to their own opinions and experiences</li>
+                  <li>• Judgement exists whether you participate or not</li>
+                </ul>
+                <p className='mt-8'>
+                  <strong className='text-sm text-blue-900'>BUT wouldn't the system amplify existing judgement?</strong>
+                </p>
+                <ul className='text-sm text-blue-900 space-y-1'>
+                  <li>• It is possible that the system could amplify existing judgement BUT...</li>
+                  <li>• This system allows clinics to:</li>
+                  <li className='ml-5'>- Learn what protocols work</li>
+                  <li className='ml-5'>- Learn about different treatment outcomes</li>
+                  <li className='ml-5'>- And improve their own overall practice/service</li>
+                  <li>• Clinics that participate gain data and learn faster than those who don't</li>
+                  <li>• If anything, this system is beneficial for genuine and quality service</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          {/* how it scales */}
+          <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+            <h3 className='text-xl font-semibold text-gray-900 mb-4'>How It Scales: 19% → 80%</h3>
+            <p className='text-gray-600 mb-6'>
+              The multiplier makes sharing individually rational. But what drives network-wide adoption from 19% to 80%?
+            </p>
+          </div>
+
+          <div className='space-y-4'>
+            {/* stage 1 */}
+            <div className='flex gap-4'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold shrink-0'>1</div>
+                <div className='w-0.5 bg-blue-200 flex-1 mt-2'></div>
+              </div>
+              <div className='pb-6'>
+                <h4 className='font-semibold text-gray-900 mb-1'>Early Adopters (19% → 35%)</h4>
+                <p className='text-sm text-gray-600'>
+                  Forward-thinking clinics join because the multiplier is an obvious win. The pool is small, but a 1.5x return is already better than nothing. Word starts to spread.
+                </p>
+              </div>
+            </div>
+
+            {/* stage 2 */}
+            <div className='flex gap-4'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold shrink-0'>2</div>
+                <div className='w-0.5 bg-blue-200 flex-1 mt-2'></div>
+              </div>
+              <div className='pb-6'>
+                <h4 className='font-semibold text-gray-900 mb-1'>Tipping Point (35% → 60%)</h4>
+                <p className='text-sm text-gray-600'>
+                  The pool is growing. Participating clinics have access to thousands of histories. Non-participants start noticing, as t3heir competitors can treat patients better because they have full context. FOMO kicks in.
+                </p>
+              </div>
+            </div>
+
+            {/* stage 3 */}
+            <div className='flex gap-4'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold shrink-0'>3</div>
+              </div>
+              <div>
+                <h4 className='font-semibold text-gray-900 mb-1'>Critical Mass (60% → 80%+)</h4>
+                <p className='text-sm text-gray-600'>
+                  Staying out is no longer viable. With 60%+ of clinics participating, non-participants are treating patients blind while competitors have full history. Joining is now the only rational choice.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className='mt-2 p-4 bg-blue-50 border border-blue-200 rounded-lg mt-5'>
+            <p className='text-sm text-blue-900'>
+              <strong>The cascade:</strong> Multiplier makes sharing individually rational → more clinics join → pool grows → staying out becomes irrational → 80%+ adoption.
+            </p>
+          </div>
+
+          {/* summary */}
+          <div className='bg-blue-600 rounded-lg p-6 text-white mt-5'>
+            <h3 className='text-xl font-semibold mb-3'>Why This Works</h3>
+            <div className='space-y-2'>
+              <p className='text-sm text-blue-100'>✓ Sharing is selfish — you always get more than you give</p>
+              <p className='text-sm text-blue-100'>✓ Switching fear is neutralised — the math favours sharing even if every patient leaves</p>
+              <p className='text-sm text-blue-100'>✓ Judgment fear is eliminated — subjective notes never leave the clinic and opportunity for clinics to learn</p>
+              <p className='text-sm text-blue-100'>✓ Network grows naturally — individual rationality drives collective adoption</p>
+              <p className='text-sm text-blue-100'>✓ No altruism required — every decision is purely in the clinic's self-interest</p>
+            </div>
+          </div>
+
         </div>
 
       )}
