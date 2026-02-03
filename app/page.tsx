@@ -37,32 +37,18 @@ export default function HomePage() {
 
     const newAccessCount = Math.floor(newPatientsShared * newMultiplier);
 
-    const newQualityProviderRating = Math.min(5, clinicData.qualityProviderRating + 0.2);
-
 
     setClinicData({
       ...clinicData,
       patientsShared: newPatientsShared,
       multiplier: newMultiplier,
       accessCount: newAccessCount,
-      qualityProviderRating: newQualityProviderRating,
     });
 
     setFulfilledRequestIds([...fulfilledRequestIds, sharingRequest!.id]);
     setSharingRequest(null);
   };
 
-  // const calculateMultiplier = (patientsShared: number) => {
-  //   let newMultiplier = 1.5;
-  //   if (patientsShared >= 10) {
-  //     newMultiplier = 2.5;
-  //   } else if (patientsShared >= 25) {
-  //     newMultiplier = 3.5;
-  //   } else if (patientsShared >= 50) {
-  //     newMultiplier = 5.0;
-  //   }
-  //   return newMultiplier;
-  // };
 
   return (
     <div className='bg-white min-h-screen'>
