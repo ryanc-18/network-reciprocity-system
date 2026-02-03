@@ -13,6 +13,9 @@ export default function HomePage() {
 
   const [fulfilledRequestIds, setFulfilledRequestIds] = useState<number[]>([]);
 
+  // network participation starting at 19 for demonstration purposes
+  const [networkParticipation, setNetworkParticipation] = useState<number>(19);
+
   const handleToggleLogIn = () => {
     setClinicData({
       ...clinicData,
@@ -24,15 +27,17 @@ export default function HomePage() {
     // Logic to handle sharing the patient history
     const newPatientsShared = clinicData.patientsShared + 1;
     let newMultiplier = 1.5;
-    if (newPatientsShared >= 10) {
-      newMultiplier = 2.5;
+    if (newPatientsShared >= 50) {
+      newMultiplier = 5.0;
     } else if (newPatientsShared >= 25) {
       newMultiplier = 3.5;
-    } else if (newPatientsShared >= 50) {
-      newMultiplier = 5.0;
+    } else if (newPatientsShared >= 10) {
+      newMultiplier = 2.5;
     }
 
     const newAccessCount = Math.floor(newPatientsShared * newMultiplier);
+
+    const newQualityProviderRating = Math.min(5, clinicData.qualityProviderRating + 0.2);
 
 
     setClinicData({
@@ -40,11 +45,24 @@ export default function HomePage() {
       patientsShared: newPatientsShared,
       multiplier: newMultiplier,
       accessCount: newAccessCount,
+      qualityProviderRating: newQualityProviderRating,
     });
 
     setFulfilledRequestIds([...fulfilledRequestIds, sharingRequest!.id]);
     setSharingRequest(null);
   };
+
+  // const calculateMultiplier = (patientsShared: number) => {
+  //   let newMultiplier = 1.5;
+  //   if (patientsShared >= 10) {
+  //     newMultiplier = 2.5;
+  //   } else if (patientsShared >= 25) {
+  //     newMultiplier = 3.5;
+  //   } else if (patientsShared >= 50) {
+  //     newMultiplier = 5.0;
+  //   }
+  //   return newMultiplier;
+  // };
 
   return (
     <div className='bg-white min-h-screen'>
@@ -72,6 +90,12 @@ export default function HomePage() {
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}>Network Simulator</button>
+              <button onClick={() => setCurrentView('walkthrough')}
+                className={`px-4 py-2 rounded-md font-medium ${
+                    currentView === 'walkthrough'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}>Walkthrough</button>
             </div>
           </div>
         </div>
@@ -109,7 +133,7 @@ export default function HomePage() {
                     {clinicData.accessCount}
                   </span>
                 </div>
-                <div className="flex justify-between py-2">
+                <div className="flex justify-between py-2 border-b border-gray-100">
                   <span className="text-gray-600">Current Multiplier:</span>
                   <span className="font-semibold text-gray-500">{clinicData.multiplier}x</span>
                 </div>
@@ -188,8 +212,220 @@ export default function HomePage() {
 
 
 
-        {currentView === 'simulator' && <div>Network Simulator Content</div>}
+        {currentView === 'simulator' && 
+          <div>
+            <h2 className='text-3xl font-bold text-gray-500 mb-6'>Network Simulator</h2>
+            <p className='text-gray-600 mb-8'>See how network growth affects the value of participation</p>
+            
+            <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+              <h3 className='text-xl font-semibold text-gray-900 mb-4'>Network Participation</h3>
+
+              {/* network participation slider */}
+              <div className='mb-8'>
+                <input type="range" min="0" max="100" value={networkParticipation} onChange={(e) => setNetworkParticipation(Number(e.target.value))} className='w-full h-2 bg-gray-200 appearance-none cursor-pointer'/>
+
+                <div className='text-center mt-4'>
+                  <div className='text-5xl font-bold text-gray-900'>{networkParticipation}%</div>
+                  <div className='text-sm text-gray-500'>of clinics participating in the network</div>
+                </div>
+              </div>
+
+              {/* milestone markers */}
+              <div className='flex justify-between mb-8'>
+                <div className={`absolute text-center transition-opacity ${networkParticipation >= 19 ? 'opacity-100' : 'opacity-30'}`} style={{ left: '19%', transform: 'translateX(-50%)' }}>
+                  <div className='text-2xl font-bold text-blue-600'>19%</div>
+                  <div className='text-gray-600 whitespace-nowrap'>Current State</div>
+                </div>
+                <div className={`absolute text-center transition-opacity ${networkParticipation >= 50 ? 'opacity-100' : 'opacity-30'}`} style={{ left: '50%', transform: 'translateX(-50%)' }}>
+                  <div className='text-2xl font-bold text-blue-600'>50%</div>
+                  <div className='text-gray-600'>Milestone Reached</div>
+                </div>
+                <div className={`absolute text-center transition-opacity ${networkParticipation >= 80 ? 'opacity-100' : 'opacity-30'}`} style={{ left: '80%', transform: 'translateX(-50%)' }}>
+                  <div className='text-2xl font-bold text-blue-600'>80%</div>
+                  <div className='text-gray-600'>Target</div>
+                </div>                      
+              </div>
+
+              {/* network pool */}
+              <div className='bg-blue-50 border border-blue-200 rounded-lg p-4 mt-20'>
+                <h4 className='font-semibold text-gray-900'>Network Pool Size at {networkParticipation}%</h4>
+                <div className='text-4xl font-bold text-blue-600 mb-4'>{Math.floor(networkParticipation * 60).toLocaleString()} histories</div>
+                <p className='text-sm text-gray-500'>Total patient histories available in the network from participating clinics.</p>
+              </div>
+            </div>
+
+            {/* your clinic stats */}
+            <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+              <h3 className='text-xl font-semibold text-gray-900 mb-4'>Your Clinic's Position</h3>
+
+              <div className='grid grid-cols-3 gap-4 mb-6'>
+                <div className='p-4 bg-gray-50 rounded-lg text-center'>
+                  <div className='text-2xl font-bold text-gray-900'>
+                    {clinicData.patientsShared}
+                  </div>
+                  <div className='text-sm text-gray-600 mt-1'>Patients Shared</div>
+                </div>
+                <div className='p-4 bg-blue-50 rounded-lg text-center'>
+                  <div className='text-2xl font-bold text-gray-600'>
+                    {clinicData.multiplier}x
+                  </div>
+                  <div className='text-sm text-gray-500 mt-1'>Your Multiplier</div>
+                </div>
+                <div className='p-4 bg-green-50 rounded-lg text-center'>
+                  <div className='text-2xl font-bold text-green-600'>
+                    {clinicData.accessCount}
+                  </div>
+                  <div className='text-sm text-gray-600 mt-1'>Histories You Can Access</div>
+                </div>
+              </div>
+
+              {clinicData.patientsShared === 0 ? (
+                <div className='p-4 bg-yellow-50 border border-yellow-200 rounded-lg'>
+                  <p className='text-yellow-800 text-sm'>
+                    💡 Start sharing patient histories to see how network growth affects your access
+                  </p>
+                </div>
+              ) : (
+                <div className='p-4 bg-blue-50 border border-blue-200 rounded-lg'>
+                  <p className='text-blue-900 text-sm font-semibold mb-2'>
+                    Key Insight: Your multiplier ({clinicData.multiplier}x) stays the same, but the VALUE increases as the network grows
+                  </p>
+                  <p className='text-blue-800 text-sm'>
+                    With {clinicData.accessCount} access points, you can now choose from{' '}
+                    <strong>{Math.floor(networkParticipation * 60).toLocaleString()}</strong> histories instead of just{' '}
+                    <strong>{Math.floor(19 * 60).toLocaleString()}</strong>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* FOMO Effect Comparison */}
+            <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-6'>
+              <h3 className='text-xl font-semibold mb-4 text-gray-500'>Participation vs. Non-Participation</h3>
+
+              <div className='grid grid-cols-2 gap-4'>
+                {/* opted in */}
+                <div className='p-4 bg-green-50 border-2 border-green-500 rounded-lg'>
+                  <div className='flex items-center gap-2 mb-3'>
+                    <span className='text-2xl text-green-700'>✓</span>
+                    <h4 className='font-semibold text-green-900'>{`You (Opted In)`}</h4>
+                  </div>
+                  <div className='space-y-2 text-sm'>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-600'>Access to Pool:</span>
+                      <span className='font-semibold text-green-700'>{Math.floor(networkParticipation * 60).toLocaleString()} histories</span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-600'>Your Multiplier:</span>
+                      <span className='font-semibold text-green-700'>{clinicData.multiplier || 1.5}x</span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-600'>Can Access:</span>
+                      <span className='font-semibold text-green-700'>{clinicData.accessCount || 'Share to Unlock'}</span>
+                    </div>
+                  </div>
+                </div>  
+
+                {/* opted out */}
+                <div className='p-4 bg-red-50 border-2 border-red-500 rounded-lg'>
+                  <div className='flex items-center gap-2 mb-3'>
+                    <span className='text-2xl text-red-700'>✗</span>
+                    <h4 className='font-semibold text-red-900'>Non-Participant</h4>
+                  </div>
+                  <div className='space-y-2 text-sm'>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-700'>Access to pool:</span>
+                      <span className='font-semibold text-red-700'>0 histories</span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-700'>Their multiplier:</span>
+                      <span className='font-semibold text-red-700'>0x</span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-gray-700'>Missing out on:</span>
+                      <span className='font-semibold text-red-700'>
+                        {Math.floor(networkParticipation * 60).toLocaleString()} histories
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className='mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg'>
+                <p className='text-sm text-yellow-900'>
+                  <strong>FOMO Effect:</strong> At {networkParticipation}% participation, non-participating clinics are completely blind to{' '}
+                  <strong>{Math.floor(networkParticipation * 60).toLocaleString()}</strong> patient histories while their competitors have full visibility.
+                </p>
+              </div>
+            </div>
+
+
+            {/* Why Network Growth Drives Adoption */}
+            <div className='bg-white rounded-lg border border-gray-200 p-6 shadow-sm'>
+              <h3 className='text-xl font-semibold mb-4 text-gray-900'>Why Network Growth Drives 19% → 80% Adoption</h3>
+              
+              <div className='space-y-4'>
+                <div className='flex gap-4 p-4 bg-gray-50 rounded-lg'>
+                  <span className='text-3xl'>🎯</span>
+                  <div>
+                    <h4 className='font-semibold mb-1 text-gray-900'>Bigger Pool = More Value</h4>
+                    <p className='text-sm text-gray-600'>
+                      At 19%: ~1,140 histories available. At 80%: ~4,800 histories available. 
+                      Your access points are worth more in a larger, higher-quality pool.
+                    </p>
+                  </div>
+                </div>
+
+                <div className='flex gap-4 p-4 bg-gray-50 rounded-lg'>
+                  <span className='text-3xl'>😱</span>
+                  <div>
+                    <h4 className='font-semibold mb-1 text-gray-900'>FOMO Pressure Intensifies</h4>
+                    <p className='text-sm text-gray-600'>
+                      As more clinics join, non-participants fall further behind. At {networkParticipation}% participation, 
+                      they're missing {Math.floor(networkParticipation * 60).toLocaleString()} histories their competitors have access to.
+                    </p>
+                  </div>
+                </div>
+
+                <div className='flex gap-4 p-4 bg-gray-50 rounded-lg'>
+                  <span className='text-3xl'>🔒</span>
+                  <div>
+                    <h4 className='font-semibold mb-1 text-gray-900'>Can't Compete Without It</h4>
+                    <p className='text-sm text-gray-600'>
+                      Once 60%+ of clinics participate, staying out means you can't provide the same quality of care. 
+                      You're treating patients blind while competitors have full history.
+                    </p>
+                  </div>
+                </div>
+
+                <div className='flex gap-4 p-4 bg-gray-50 rounded-lg'>
+                  <span className='text-3xl'>⚖️</span>
+                  <div>
+                    <h4 className='font-semibold mb-1 text-gray-900'>Still Selfish & Rational</h4>
+                    <p className='text-sm text-gray-600'>
+                      Your decision to join is purely self-interested: you ALWAYS get more than you give (via your personal multiplier), 
+                      and the network pool just makes that exchange more valuable.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        }
+      {currentView === 'walkthrough' && (
+        <div>
+          <h2 className='text-xl font-bold text-gray-500 mb-4'>Prototype Walkthrough</h2>
+        </div>
+
+      )}
       </main>
+
+
+
+
+      {/* modal backdrop for sharing request page */}
       {sharingRequest && (
         // modal backdrop
         <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center'>

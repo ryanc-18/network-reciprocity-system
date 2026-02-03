@@ -23,4 +23,4 @@ export interface Patient {
   lastVisit: string;
 }
 
-export type ViewType = 'dashboard' | 'requests' | 'simulator';
+export type ViewType = 'dashboard' | 'requests' | 'simulator' | 'walkthrough';

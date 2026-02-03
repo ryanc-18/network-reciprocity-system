@@ -1,3 +1,35 @@
+export const MOCK_CLINICS = {
+  name: 'My Clinic',
+  optedIn: false,
+  patientsShared: 0,
+  accessCount: 0,
+  multiplier: 0,
+};
+
+export const MOCK_PATIENTS = [
+  {
+    id: 1,
+    name: 'John Doe',
+    age: 45,
+    conditions: ['Hypertension', 'Diabetes'],
+    lastVisit: '2023-12-15',
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    age: 30,
+    conditions: ['Asthma'],
+    lastVisit: '2024-01-05',
+  },
+  {
+    id: 3,
+    name: 'Alice Johnson',
+    age: 60,
+    conditions: ['Arthritis', 'High Cholesterol'],
+    lastVisit: '2023-11-20',
+  },
+];
+
 export const MOCK_REQUESTS = [
   {
     id: 1,
